@@ -1,13 +1,21 @@
 SampleApp::Application.routes.draw do
-  resources :articals
+  # resources :articals
 
   get "/users/search", to: 'users#search'
+  
   resources :users do
     member do
       get :following, :followers
     end
   end
-
+  
+  get "/articals/search", to: 'articals#search'
+  
+  resources :articals do
+    member do
+      get :following, :followers
+    end
+  end
 
 
 
