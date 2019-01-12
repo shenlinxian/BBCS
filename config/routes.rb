@@ -1,6 +1,7 @@
 SampleApp::Application.routes.draw do
   # resources :articals
 
+  get "/articals/manage", to: 'articals#manage'
   get "/users/search", to: 'users#search'
   
   resources :users do

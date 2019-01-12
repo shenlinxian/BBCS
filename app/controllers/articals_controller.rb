@@ -1,5 +1,5 @@
 class ArticalsController < ApplicationController
-  before_action :set_artical, only: [:edit, :update, :destroy]
+  before_action :set_artical, only: [:edit,:show, :update, :destroy]
 
   # GET /articals
   # GET /articals.json
@@ -11,6 +11,11 @@ class ArticalsController < ApplicationController
     @title = params[:search]
     @articals = Artical.paginate_by_sql("select * from articals where title like '"+ @title +"%'", page: params[:page])
     render "index"
+  end
+
+  def manage
+    @articals = Artical.all
+    render "manage"
   end
 
   # GET /articals/1
