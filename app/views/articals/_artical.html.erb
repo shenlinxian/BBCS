@@ -1,0 +1,20 @@
+<!-- 显示文章列表时，每篇文章的显示(内容链接和删除链接) -->
+ 
+<tr>
+  
+  <td>
+    <%= link_to artical.title, artical %>
+  </td>
+  <td>
+    <%= link_to artical.read_number,artical %>
+  </td>
+  
+  <!-- 删除文章的链接（只有管理员能看到） -->
+  
+  <% if current_user.admin?  %>
+    <td>
+      <%= link_to "删除", artical, method: :delete,
+                                  data: { confirm: "You sure?" } %>
+    </td>
+  <% end %>
+</tr>
