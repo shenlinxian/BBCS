@@ -20,6 +20,7 @@
                 <li><%= link_to "重置密码", edit_user_path(current_user) %></li>
                 <%if current_user.admin? %>
                   <li><%= link_to "用户管理", users_path %></li>
+                  <li><%= link_to "文章管理", articals_path %></li>
                 <%end %>
 
 
@@ -37,3 +38,5 @@
     </div>
   </div>
 </header>
+
+

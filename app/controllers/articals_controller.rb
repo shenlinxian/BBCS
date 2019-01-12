@@ -1,10 +1,16 @@
 class ArticalsController < ApplicationController
-  before_action :set_artical, only: [:show, :edit, :update, :destroy]
+  before_action :set_artical, only: [:edit, :update, :destroy]
 
   # GET /articals
   # GET /articals.json
   def index
     @articals = Artical.all
+  end
+  
+  def search
+    @title = params[:search]
+    @articals = Artical.paginate_by_sql("select * from articals where title like '"+ @title +"%'", page: params[:page])
+    render "index"
   end
 
   # GET /articals/1
@@ -76,9 +82,16 @@ class ArticalsController < ApplicationController
     def set_artical
       @artical = Artical.find(params[:id])
     end
+    
+    
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def artical_params
       params.require(:artical).permit(:title, :category, :content, :user, :read_number, :thumber_up_number)
     end
+    
+    # 确保是管理员
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
+  end
 end
