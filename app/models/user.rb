@@ -1,12 +1,19 @@
 class User < ActiveRecord::Base
   has_many :replies, dependent: :destroy
   has_many :passages, dependent: :destroy
-  has_many :relationships, foreign_key: "follower_id", dependent: :destroy
-  has_many :followed_users, through: :relationships, source: :followed
-  has_many :reverse_relationships, foreign_key: "followed_id",
-                                   class_name:  "Relationship",
+  
+  # 关系表 by lh start!!!!!!!
+  has_many :active_relationships, class_name:  "Relationship",
+                                  foreign_key: "follower_id",
+                                  dependent:   :destroy
+  has_many :passive_relationships, class_name:  "Relationship",
+                                   foreign_key: "followed_id",
                                    dependent:   :destroy
-  has_many :followers, through: :reverse_relationships, source: :follower
+                                   
+  has_many :followers, through: :passive_relationships, source: :follower
+  has_many :following, through: :active_relationships, source: :followed
+  # 关系表 by lh end!!!!!!!
+  
   before_save { self.email = email.downcase }
   before_create :create_remember_token
   validates :name, presence: true, length: { maximum: 50 }
@@ -38,16 +45,19 @@ class User < ActiveRecord::Base
     Micropost.from_users_followed_by(self)
   end
 
+  # 关注另一个用户
+  def follow(other_user)
+    following << other_user
+  end
+
+  # 取消关注另一个用户
+  def unfollow(other_user)
+    following.delete(other_user)
+  end
+
+  # 如果当前用户关注了指定的用户，返回 true
   def following?(other_user)
-    relationships.find_by(followed_id: other_user.id)
-  end
-
-  def follow!(other_user)
-    relationships.create!(followed_id: other_user.id)
-  end
-
-  def unfollow!(other_user)
-    relationships.find_by(followed_id: other_user.id).destroy
+    following.include?(other_user)
   end
 
   private
