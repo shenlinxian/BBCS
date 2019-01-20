@@ -17,10 +17,6 @@
         <td><lable>头像</lable></td>
         <td><lable>个人主页</lable></td>
         <td><lable>查看资料</lable></td>
-        <% if current_user.admin? %>
-          <td><lable>操作</lable></td>
-        <% end %>
-    
       </tr>
       <!-- Rails 会把 @users 当作一个 User 对象列表，传给 render 方法后，Rails 会自动遍历这个列表，然后使用局部视图 _user.html.erb 渲染每个对象 -->
       <% @users.each do |user| %>
