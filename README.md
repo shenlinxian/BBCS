@@ -12,6 +12,11 @@ rake db:migrate
 
 rails g migration add_column_to_passages title:string
 bundle exec rake db:migrate
+bundle exec rake db:seed
+
+安装
+sudo apt-get update
+sudo apt-get -y install imagemagick
 
 
 

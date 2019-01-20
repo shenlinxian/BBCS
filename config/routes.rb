@@ -4,8 +4,13 @@ SampleApp::Application.routes.draw do
   get "/articals/manage", to: 'articals#manage'
   get "/users/search", to: 'users#search'
   
+    # 关注
+  resources :relationships,       only: [:create, :destroy]
+  
   resources :users do
     member do
+      # /users/1/following
+      # /users/1/followers
       get :following, :followers
     end
   end
@@ -21,7 +26,7 @@ SampleApp::Application.routes.draw do
 
 
   resources :sessions,      only: [:new, :create, :destroy]
-  resources :relationships, only: [:create, :destroy]
+  
   root to: 'articals#index'
 
 
@@ -38,6 +43,5 @@ SampleApp::Application.routes.draw do
   end
   
   resources :replies
-    
-
+  
 end
