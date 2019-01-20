@@ -21,3 +21,11 @@ User.create!(name:  "root",
                password:              password,
                password_confirmation: password)
 end
+
+# Following relationships
+users = User.all
+user  = users.first
+following = users[2..99]
+followers = users[3..50]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
