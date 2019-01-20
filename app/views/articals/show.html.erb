@@ -55,6 +55,16 @@
       </div>
     </div>
   <% end %>
+  
+    <h3> add new reply</h3>
+
+<%= simple_form_for([@artical, @artical.replies.build]) do |f| %>
+  <%= f.label :评论 %>
+  <%= f.text_area :content, id: :post_content, style: 'height:400px; max-height:500px;' %>
+  <div style="margin-top: 50px">
+    <%= f.button :submit, value: "发布评论" %>
+  </div>
+<% end %>
 
 </div>
 
