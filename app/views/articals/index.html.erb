@@ -1,27 +1,3 @@
-<table width='300' border="1" align="center">
-  <tr align='center'>
-    <td rowspan='2'>
-      <b>A</b>
-    </td>
-    <td colspan='2' height='100'>
-      <b>B</b>
-    </td>
-  </tr>
-  <tr align='center'>
-    <td height='100'>
-      <b>E</b>
-    </td>
-    <td rowspan='2'>
-      <b>C</b>
-    </td>
-  </tr>
-  <tr align='center'>
-    <td colspan='2' height='100'><b>D</b>
-    </td>
-  </tr>
-</table>
-
-
 
 <% if logged_in? %>
   
@@ -37,7 +13,7 @@
 
       <div class="tab-pane fade show article-list active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
         <%@articals.each do |each_artical| %>
-          <div class="article-list-item">
+          <div class="article-list-item" onload="get_one_num(1)">
             <div class="list-item-title">
               <p class="article-list-item-txt">
                 <a href=<%="/articals/"+each_artical.id.to_s %> target="_blank" title="编辑"><%=each_artical.title %></a>
@@ -55,8 +31,8 @@
 
                   <div class="btn" data-key="on">
                 
-                  <b id="thumb_up_css">&#10084;</b>
-                  <span><%=each_artical.thumber_up_number %></span>
+                  <b  id="thumb_up_css">&#10084;</b>
+                  <span class="for_id" id=<%= each_artical.id.to_s%>><%=each_artical.thumber_up_number %></span>
 
                   </div>
 

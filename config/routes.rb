@@ -3,6 +3,8 @@ SampleApp::Application.routes.draw do
 
   get "/articals/manage", to: 'articals#manage'
   get "/users/search", to: 'users#search'
+
+  post "/upload_thumb_up_num", to: 'articals#upload_thumb_up_num'
   
     # 关注
   resources :relationships,       only: [:create, :destroy]

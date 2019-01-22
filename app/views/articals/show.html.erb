@@ -21,7 +21,7 @@
       <div class="btn" data-key="on">
 
         <b id="thumb_up_css">&#10084;</b>
-        <span><%=@artical.thumber_up_number %></span>
+        <span class="for_id" id=<%= @artical.id.to_s%> ><%=@artical.thumber_up_number %></span>
 
       </div>
 
@@ -39,7 +39,7 @@
           <span > <%==reply.content %> </span>
           <% if current_user?(User.find(reply.user)) or current_user.admin? %>
             <span><a href=<%="/replies/"+reply.id.to_s+"/edit" %>>edit</a> </span>
-            <span><%= link_to "delete", reply, method: :delete, 
+            <span ><%= link_to "delete", reply, method: :delete,
                                                  data: { confirm: "are you sure?" } %></span>
           <%end%>
         </p>

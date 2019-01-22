@@ -1,3 +1,4 @@
+
 class ArticalsController < ApplicationController
   before_action :set_artical, only: [:edit,:show, :update, :destroy]
 
@@ -16,6 +17,10 @@ class ArticalsController < ApplicationController
   def manage
     @articals = Artical.all
     render "manage"
+  end
+
+  def upload_thumb_up_num
+    artical_params
   end
 
   # GET /articals/1
