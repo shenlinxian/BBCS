@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
 
     # 可以在控制台进入debug模式
-    debugger
+    #debugger
   end
 
   def create
@@ -68,6 +68,21 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
+  end
+  
+  # 关注功能
+  def following
+    @title = "Following"
+    @user  = User.find(params[:id])
+    @users = @user.following.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
   end
 
   private

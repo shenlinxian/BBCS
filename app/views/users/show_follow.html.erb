@@ -1,30 +1,41 @@
 <% provide(:title, @title) %>
 <div class="row">
-  <aside class="span4">
-    <section>
+  <aside class="col-md-4">
+    <section class="user_info">
       <%= gravatar_for @user %>
       <h1><%= @user.name %></h1>
       <span><%= link_to "view my profile", @user %></span>
-      <span><b>passages:</b> <%= @user.passages.count %></span>
     </section>
-    <section>
+    <section class="stats">
       <%= render 'shared/stats' %>
-      <% if @users.any? %>
-        <div class="user_avatars">
-          <% @users.each do |user| %>
-            <%= link_to gravatar_for(user, size: 30), user %>
-          <% end %>
-        </div>
-      <% end %>
     </section>
   </aside>
-  <div class="span8">
-    <h3><%= @title %></h3>
-    <% if @users.any? %>
-      <ul class="users">
-        <%= render @users %>
-      </ul>
-      <%= will_paginate %>
-    <% end %>
-  </div>
+  <div class="col-md-8">
+     <h3>关注者列表</h3>
+    <table class="table table-bordered">
+      <tr>
+        <td><lable>头像</lable></td>
+        <td><lable>个人主页</lable></td>
+        <td><lable>查看资料</lable></td>
+      </tr>
+      <!-- Rails 会把 @users 当作一个 User 对象列表，传给 render 方法后，Rails 会自动遍历这个列表，然后使用局部视图 _user.html.erb 渲染每个对象 -->
+      <% @users.each do |user| %>
+        <tr>
+        <td>
+          <%= gravatar_for user, size: 50 %>
+        </td>
+        <td>
+          <%= link_to user.name, user %>
+        </td>
+        <td>
+          <!-- 查看个人资料 -->
+          <%= link_to("查看个人资料", "/users/"+user.id.to_s)  %>
+        </td>
+        </tr>
+      <% end %>
+      
+    </table>
+
+    <!-- 分页 -->
+    <%= will_paginate %>
 </div>

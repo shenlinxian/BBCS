@@ -15,6 +15,14 @@ class RepliesController < ApplicationController
 
   end
   
+  def create
+    @artical = Artical.find(params[:artical_id])
+    @reply = @artical.replies.new(params[:reply].permit(:content, :artical_id))
+    @reply.user_id=session[:user_id]
+    @reply.save
+    redirect_to artical_path(@artical)
+  end
+  
   def update
     respond_to do |format|
       if @reply.update(reply_params)

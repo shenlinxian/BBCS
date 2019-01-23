@@ -6,7 +6,7 @@
 
   <div class="article-list-item-info" style="margin-top: ">
     <div class="item-info-left">
-      <span class> <%= User.find(1).name  %></span>
+      <span class><a href="/users/<%@artical.user %>"> <%= User.find(@artical.user).name  %></a> </span>
       <span class> <%=@artical.updated_at %></span>
       <span class>
           <svg class="icon icon-read">
@@ -21,7 +21,7 @@
       <div class="btn" data-key="on">
 
         <b id="thumb_up_css">&#10084;</b>
-        <span><%=@artical.thumber_up_number %></span>
+        <span class="for_id" id=<%= @artical.id.to_s%> ><%=@artical.thumber_up_number %></span>
 
       </div>
 
@@ -39,7 +39,7 @@
           <span > <%==reply.content %> </span>
           <% if current_user?(User.find(reply.user)) or current_user.admin? %>
             <span><a href=<%="/replies/"+reply.id.to_s+"/edit" %>>edit</a> </span>
-            <span><%= link_to "delete", reply, method: :delete, 
+            <span ><%= link_to "delete", reply, method: :delete,
                                                  data: { confirm: "are you sure?" } %></span>
           <%end%>
         </p>
@@ -55,6 +55,16 @@
       </div>
     </div>
   <% end %>
+  
+    <h3> add new reply</h3>
+
+<%= simple_form_for([@artical, @artical.replies.build]) do |f| %>
+  <%= f.label :评论 %>
+  <%= f.text_area :content, id: :post_content, style: 'height:400px; max-height:500px;' %>
+  <div style="margin-top: 50px">
+    <%= f.button :submit, value: "发布评论" %>
+  </div>
+<% end %>
 
 </div>
 
