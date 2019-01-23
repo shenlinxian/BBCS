@@ -22,7 +22,7 @@
 
             <div class="article-list-item-info">
               <div class="item-info-left">
-                <span class> <%= User.find(each_artical.user).name  %></span>
+                <span class><a href="/users/<%=each_artical.user%>"> <%= User.find(each_artical.user).name  %></a> </span>
                 <span class> <%=each_artical.updated_at %></span>
                 <span class>
                   阅读量:

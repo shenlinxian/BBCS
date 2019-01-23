@@ -6,7 +6,7 @@
 
   <div class="article-list-item-info" style="margin-top: ">
     <div class="item-info-left">
-      <span class> <%= User.find(1).name  %></span>
+      <span class><a href="/users/<%@artical.user %>"> <%= User.find(@artical.user).name  %></a> </span>
       <span class> <%=@artical.updated_at %></span>
       <span class>
           <svg class="icon icon-read">
