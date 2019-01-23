@@ -36,15 +36,7 @@
 
                   </div>
 
-                <%if current_user.admin? %>
-                <div class="btn" data-key="on">
                 
-                  <span><%= link_to "删除", each_artical, method: :delete,
-                                  data: { confirm: "You sure?" } %></span>
-
-                </div>
-                
-                <%end %>
 
               </div>
 
