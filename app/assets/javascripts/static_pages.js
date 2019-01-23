@@ -13,10 +13,10 @@ function get_thumb_up(){
         type:"POST",
 
         url:"http://45.32.60.32:8080/web_thumb/get_thumb_up",
-        data:"username="+"1",
+
 
         success:function(data){
-
+            console.log("..."+data)
 
             var arr=data.split('=')
             //code result

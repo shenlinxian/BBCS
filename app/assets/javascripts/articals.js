@@ -1,9 +1,11 @@
 
 
 $(function(){
+
     show_thumb_num();
     /*建立一个函数*/
     $(".btn").click(function(){
+        sleep(1000)
         var num;
         var id;
         $(".for_id").each(function(){
