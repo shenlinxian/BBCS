@@ -16,7 +16,7 @@ gem "simple_form"
 gem 'motion-markdown-it'
 
 gem 'simditor'
-#gem 'rjb'
+gem 'rjb'
 
 gem 'rails_kindeditor'
 
